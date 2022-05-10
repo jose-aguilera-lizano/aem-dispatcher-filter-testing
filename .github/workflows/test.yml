@@ -2,7 +2,7 @@ name: test-dispatcher-filters
 # run the workflow manually
 on: [workflow_dispatch]
 jobs:
-  test_dispatcher_filters:
+  test_dispatcher_filters_test:
     # use lightweight Linux distro Alpine (https://hub.docker.com/_/alpine)
     container:
       image: alpine:latest

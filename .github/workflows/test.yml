@@ -1,4 +1,4 @@
-name: test-dispatcher-filters
+name: this is a test
 # run the workflow manually
 on: [workflow_dispatch]
 jobs:

@@ -5,14 +5,14 @@ jobs:
   test_dispatcher_filters:
     # use lightweight Linux distro Alpine (https://hub.docker.com/_/alpine)
     container:
-      image: ubuntu:latest
+      image: redhat/ubi8:latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: apt-get -y update && apt-get -y install apache2
+      - run: yum -y --nogpgcheck install httpd
       # create soft link "httpd" to "apache2"
-      - run: ln -s /etc/apache2 /etc/httpd
-      - run: ls -laR /etc/apache2/
+      #- run: ln -s /etc/apache2 /etc/httpd
+      #- run: ls -laR /etc/apache2/
       - run: mkdir -p /etc/httpd/conf.dispatcher.d/filters
       - run: mkdir -p /var/www/modules/dispatcher
       - run: mkdir -p /var/www/renderer

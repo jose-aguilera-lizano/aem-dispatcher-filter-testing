@@ -3,20 +3,17 @@ name: test-dispatcher-filters-ubuntu
 on: [workflow_dispatch]
 jobs:
   test_dispatcher_filters:
-    # use lightweight Linux distro Alpine (https://hub.docker.com/_/alpine)
     container:
       image: redhat/ubi8:latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: yum -y --nogpgcheck install httpd
-      # create soft link "httpd" to "apache2"
-      #- run: ln -s /etc/apache2 /etc/httpd
-      #- run: ls -laR /etc/apache2/
+      - run: cp httpd-renderer.conf /etc/httpd/conf/httpd-renderer.conf
       - run: mkdir -p /etc/httpd/conf.dispatcher.d/filters
-      - run: mkdir -p /var/www/modules/dispatcher
+      - run: mkdir -p /etc/httpd/modules/dispatcher
       - run: mkdir -p /var/www/renderer
-      - run: cp dispatcher/mod_dispatcher.so /var/www/modules/dispatcher/mod_dispatcher.so
+      - run: cp dispatcher/mod_dispatcher.so /etc/httpd/modules/dispatcher/mod_dispatcher.so
       - run: cp httpd-dispatcher.conf /etc/httpd/conf.d/httpd-dispatcher.conf
       - run: cp dispatcher.any /etc/httpd/conf.dispatcher.d/dispatcher.any
       #- run: cat /etc/apache2/httpd.conf
